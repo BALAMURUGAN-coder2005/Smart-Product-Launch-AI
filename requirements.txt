@@ -9,3 +9,4 @@ textblob
 requests
 openpyxl
 gunicorn
+plotly
