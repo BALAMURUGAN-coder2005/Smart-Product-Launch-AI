@@ -1,2 +1,11 @@
-flask pandas numpy scikit-learn joblib matplotlib reportlab textblob requests openpyxl
-python -m textblob.download_corpora
+flask
+pandas
+numpy
+scikit-learn
+joblib
+matplotlib
+reportlab
+textblob
+requests
+openpyxl
+gunicorn
