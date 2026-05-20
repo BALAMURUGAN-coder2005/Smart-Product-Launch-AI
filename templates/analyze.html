@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="page-title gsap-fade-up text-gradient" style="margin-bottom: 30px;"><i class="fa-solid fa-magnifying-glass-chart"></i> Analyze Brand</h1>
+
+<div class="glass-card gsap-fade-up">
+    <form method="POST" class="form-card">
+        <label><i class="fa-solid fa-tag"></i> Select Brand:</label>
+        <select name="brand" class="form-control" required>
+            <option value="">-- Choose Brand --</option>
+            {% for b in brands %}
+            <option value="{{ b }}" {% if selected_brand==b %}selected{% endif %}>{{ b }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn-main mt-3" type="submit"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze</button>
+    </form>
+</div>
+
+{% if selected_brand %}
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="subheading gsap-fade-up mt-4"><i class="fa-solid fa-arrow-trend-up"></i> Popularity Trend – {{ selected_brand }}</h2>
+        <div class="glass-card gsap-fade-up">
+            <div class="chart-container">{{ pop_chart|safe }}</div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <h2 class="subheading gsap-fade-up mt-4"><i class="fa-solid fa-medal"></i> Success Performance</h2>
+        <div class="glass-card gsap-fade-up">
+            <div class="chart-container">{{ suc_chart|safe }}</div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

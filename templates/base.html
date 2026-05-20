@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Product Launch AI</title>
+
+    <!-- Latest Plotly -->
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+    
+    <!-- GSAP for Cinematic Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+<nav class="premium-nav">
+    <div class="nav-container">
+        <a href="/" class="nav-brand"><i class="fa-solid fa-mobile-screen-button" style="color: var(--neon-cyan);"></i> Smart Launch <span>AI</span></a>
+
+        <div class="nav-links">
+            <a href="/" class="{% if request.path=='/' %}active-link{% endif %}"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="{{ url_for('upload_dataset') }}" class="{% if request.path=='/upload-dataset' %}active-link{% endif %}"><i class="fa-solid fa-cloud-arrow-up"></i> Upload</a>
+            <a href="/dashboard" class="{% if request.path=='/dashboard' %}active-link{% endif %}"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+            <a href="/analyze" class="{% if request.path=='/analyze' %}active-link{% endif %}"><i class="fa-solid fa-magnifying-glass-chart"></i> Analyze</a>
+            <a href="/predict" class="{% if request.path=='/predict' %}active-link{% endif %}"><i class="fa-solid fa-wand-magic-sparkles"></i> Predict</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container main-content">
+    {% block content %}{% endblock %}
+</div>
+
+<script>
+    // Global Cinematic Entry Animation
+    document.addEventListener("DOMContentLoaded", () => {
+        gsap.from(".nav-brand", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out" });
+        gsap.from(".nav-links a", { 
+            y: -20, 
+            opacity: 0, 
+            duration: 0.8, 
+            stagger: 0.1, 
+            ease: "power3.out" 
+        });
+        
+        gsap.from(".gsap-fade-up", {
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.3
+        });
+    });
+</script>
+
+</body>
+</html>

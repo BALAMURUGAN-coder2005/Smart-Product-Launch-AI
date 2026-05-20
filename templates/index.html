@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+/* Custom Hero Styles */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 0;
+    min-height: 50vh;
+}
+
+.hero-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-text h1 {
+    font-size: 56px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* 3D Animated Orb */
+.orb {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--neon-cyan), var(--neon-purple));
+    box-shadow: 0 0 60px rgba(0, 240, 255, 0.4), inset 0 0 40px rgba(255, 255, 255, 0.2);
+    animation: floatOrb 6s ease-in-out infinite, pulseOrb 4s ease-in-out infinite;
+    position: relative;
+}
+
+.orb::before {
+    content: '';
+    position: absolute;
+    top: -20px; left: -20px; right: -20px; bottom: -20px;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    animation: rotateOrb 15s linear infinite;
+}
+
+.orb::after {
+    content: '';
+    position: absolute;
+    top: -50px; left: -50px; right: -50px; bottom: -50px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    animation: rotateOrb 25s linear infinite reverse;
+}
+
+@keyframes floatOrb {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+}
+@keyframes pulseOrb {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+@keyframes rotateOrb {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 30px;
+}
+
+.stat-card h3 {
+    font-size: 48px;
+    color: var(--neon-cyan);
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.stat-card p {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-visual {
+        margin-top: 60px;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="hero-section">
+    <div class="hero-text gsap-fade-up">
+        <h1>Predict the Future of <br><span class="text-gradient">Smartphone Launches</span></h1>
+        <p>Harness the power of AI to analyze brand momentum, predict market success, and optimize your next big product reveal. Experience the ultimate analytics engine.</p>
+
+        <div class="d-flex gap-3" style="justify-content: flex-start;">
+            <a href="/dashboard" class="btn-main"><i class="fa-solid fa-rocket"></i> Launch Dashboard</a>
+            <a href="/predict" class="btn-outline"><i class="fa-solid fa-bolt"></i> Run Prediction</a>
+        </div>
+    </div>
+
+    <div class="hero-visual gsap-fade-up">
+        <div class="orb"></div>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="glass-card stat-card gsap-fade-up">
+        <h3>{{ latest_year }}</h3>
+        <p>Latest Data</p>
+    </div>
+    <div class="glass-card stat-card gsap-fade-up">
+        <h3>{{ total_brands }}</h3>
+        <p>Brands Tracked</p>
+    </div>
+    <div class="glass-card stat-card gsap-fade-up">
+        <h3>{{ total_models }}</h3>
+        <p>Models Analyzed</p>
+    </div>
+</div>
+
+{% endblock %}

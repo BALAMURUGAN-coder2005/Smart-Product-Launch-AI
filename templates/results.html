@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5>Metrics</h5>
+        <ul class="list-group list-group-flush">
+          {% for k,v in metrics.items() %}
+            <li class="list-group-item"><strong>{{ k }}:</strong> {{ v }}</li>
+          {% endfor %}
+        </ul>
+        <hr>
+        {% if gensim_available %}
+          <h6>Topics (LDA)</h6>
+          <ul class="small">
+            {% for t in topics %}
+              <li>{{ t }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="small text-muted">LDA not available (install gensim to enable topic modeling)</p>
+        {% endif %}
+        <hr>
+        <a class="btn btn-outline-primary btn-sm" href="data:;base64,{{ csv_b64 }}" download="{{ filename }}">Download processed CSV</a>
+      </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5>Top Keywords</h5>
+        <ul class="list-unstyled small">
+          {% for k,s in top_keywords %}
+            <li>{{ k }} — {{ s }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5>Visuals</h5>
+        <div class="row">
+          <div class="col-md-6">
+            {% if img_sent %}
+              <img src="data:image/png;base64,{{ img_sent }}" class="img-fluid" alt="sentiment">
+            {% endif %}
+          </div>
+          <div class="col-md-6">
+            {% if img_tags %}
+              <img src="data:image/png;base64,{{ img_tags }}" class="img-fluid" alt="tags">
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5>Sample Posts (first 200 rows)</h5>
+        <div style="max-height:420px; overflow:auto;">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>#</th><th>Platform</th><th>Text</th><th>Eng</th><th>Sent</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in rows %}
+                <tr>
+                  <td>{{ r.post_id }}</td>
+                  <td>{{ r.platform }}</td>
+                  <td style="max-width:400px;">{{ r.text }}</td>
+                  <td>{{ r.engagement }}</td>
+                  <td>{{ r.sent_label }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

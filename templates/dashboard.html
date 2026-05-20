@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="page-title gsap-fade-up text-gradient" style="margin-bottom: 30px;"><i class="fa-solid fa-chart-line"></i> Product Insight Dashboard</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="glass-card gsap-fade-up">
+            <h2><i class="fa-solid fa-timeline" style="color: var(--neon-cyan);"></i> Year-by-Year Success Timeline</h2>
+            <div class="chart-container">{{ chart_timeline|safe }}</div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="glass-card gsap-fade-up">
+            <h2><i class="fa-solid fa-chart-column" style="color: var(--neon-magenta);"></i> Success Rates Per Model</h2>
+            <div class="chart-container">{{ chart_success|safe }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="glass-card gsap-fade-up">
+            <h2><i class="fa-solid fa-braille" style="color: var(--neon-purple);"></i> Rating vs Popularity</h2>
+            <div class="chart-container">{{ chart_scatter|safe }}</div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="glass-card gsap-fade-up">
+            <h2><i class="fa-solid fa-trophy" style="color: gold;"></i> Competitor Brand Ranking</h2>
+            <div class="chart-container">{{ chart_race|safe }}</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

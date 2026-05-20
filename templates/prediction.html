@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="predict-container">
+
+    <h1 class="page-title gsap-fade-up text-gradient" style="margin-bottom: 30px;">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Predict Product Launch Success
+    </h1>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto" style="margin: 0 auto; max-width: 800px;">
+            <div class="glass-card gsap-fade-up">
+
+                <form method="post" action="{{ url_for('predict') }}">
+
+                    <div class="row">
+                        <!-- BRAND -->
+                        <div class="col-md-6 form-group">
+                            <label><i class="fa-solid fa-tag"></i> Brand</label>
+                            <select name="brand" class="form-control" required>
+                                <option value="">-- Select Brand --</option>
+                                {% for b in brands %}
+                                <option value="{{ b }}">{{ b }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- MODEL -->
+                        <div class="col-md-6 form-group">
+                            <label><i class="fa-solid fa-mobile-screen"></i> Model Name</label>
+                            <input type="text" name="model" class="form-control" placeholder="Example: iPhone 17" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- RATING -->
+                        <div class="col-md-6 form-group">
+                            <label><i class="fa-solid fa-star"></i> Expected Rating (1–5)</label>
+                            <input type="number" name="rating" class="form-control" min="1" max="5" step="0.1" required>
+                        </div>
+
+                        <!-- POPULARITY -->
+                        <div class="col-md-6 form-group">
+                            <label><i class="fa-solid fa-fire"></i> Expected Popularity (1–100)</label>
+                            <input type="number" name="popularity" class="form-control" min="1" max="100" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- HITS -->
+                        <div class="col-md-6 form-group">
+                            <label><i class="fa-solid fa-eye"></i> Expected Hits (Views / Searches)</label>
+                            <input type="number" name="hits" class="form-control" min="0" required>
+                        </div>
+
+                        <!-- YEAR -->
+                        <div class="col-md-6 form-group">
+                            <label><i class="fa-solid fa-calendar-days"></i> Launch Year</label>
+                            <input type="number" name="launch_year" class="form-control" placeholder="2026" required>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button class="btn-main" type="submit" style="width: 100%;"><i class="fa-solid fa-microchip"></i> Run AI Prediction</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

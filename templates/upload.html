@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title text-center mb-4 gsap-fade-up text-gradient"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Product Dataset</h2>
+
+<div class="row">
+    <div class="col-md-6 mx-auto" style="margin: 0 auto;">
+        <div class="glass-card p-4 gsap-fade-up">
+            <form method="POST" enctype="multipart/form-data">
+                
+                <label><i class="fa-solid fa-file-csv" style="color: var(--neon-cyan);"></i> Select CSV File:</label>
+                <input class="form-control mb-3" style="padding: 10px;" type="file" name="dataset" accept=".csv" required>
+
+                <button class="btn-main mt-3" style="width: 100%;"><i class="fa-solid fa-upload"></i> Upload Dataset</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

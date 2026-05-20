@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4 gsap-fade-up text-gradient"><i class="fa-solid fa-rocket"></i> Product Launch AI Report</h1>
+
+    <!-- AI Success Score -->
+    <div class="glass-card p-4 mb-4 text-center gsap-fade-up">
+        <h2 class="mb-3">{{ brand }} {{ model }} – Predicted Success Score</h2>
+        <h1 style="font-size: 80px; color: var(--neon-cyan); text-shadow: 0 0 20px rgba(0,240,255,0.5);">{{ score }}%</h1>
+        <p class="text-muted">Higher score = Higher market success probability</p>
+    </div>
+
+    <!-- Expected Views & Platform Suggestion -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="glass-card p-4 gsap-fade-up" style="height: 100%;">
+                <h3><i class="fa-solid fa-eye" style="color: var(--neon-magenta);"></i> Expected Social Reach</h3>
+                <p style="font-size: 36px; font-weight: 800; color:var(--text-main); margin: 10px 0;">
+                    {{ expected_views }}+ views
+                </p>
+                <small class="text-muted">
+                    *Estimated using popularity, hits, and market behavior*
+                </small>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="glass-card p-4 gsap-fade-up" style="height: 100%;">
+                <h3><i class="fa-solid fa-share-nodes" style="color: var(--neon-purple);"></i> Recommended Platform</h3>
+                <p style="font-size: 28px; font-weight: 800; color:var(--text-main); margin: 10px 0;">
+                    {{ platform }}
+                </p>
+                <small class="text-muted">
+                    *AI chooses the best platform for maximum engagement*
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trending Hashtags -->
+    <div class="glass-card p-4 mb-4 gsap-fade-up">
+        <h3><i class="fa-solid fa-fire" style="color: #ff5e00;"></i> Trending Hashtags</h3>
+        <div class="mt-3">
+            {% for tag in hashtags %}
+            <span class="result-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- AI Captions -->
+    <div class="glass-card p-4 mb-4 gsap-fade-up">
+        <h3><i class="fa-solid fa-pen-nib" style="color: var(--neon-cyan);"></i> Suggested Captions</h3>
+        <ul style="font-size: 18px; margin-top: 15px; color: var(--text-main); padding-left: 20px;">
+            {% for line in captions %}
+                <li class="mb-2">{{ line }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- CHART 1: Past Models -->
+    <div class="glass-card p-4 mb-4 gsap-fade-up">
+        <h3><i class="fa-solid fa-clock-rotate-left"></i> {{ brand }} – Past Success Trend</h3>
+        <div class="chart-container mt-3">
+            {{ past_chart|safe }}
+        </div>
+    </div>
+
+    <!-- CHART 2: New Model Metrics -->
+    <div class="glass-card p-4 mb-4 gsap-fade-up">
+        <h3><i class="fa-solid fa-chart-pie"></i> Predicted Performance Overview for {{ model }}</h3>
+        <div class="chart-container mt-3">
+            {{ new_chart|safe }}
+        </div>
+    </div>
+
+    <!-- CHART 3: Combined Trend -->
+    <div class="glass-card p-4 mb-4 gsap-fade-up">
+        <h3><i class="fa-solid fa-chart-area"></i> Combined Model Growth Trend</h3>
+        <small class="text-muted">Old models vs New {{ model }} prediction</small>
+        <div class="chart-container mt-3">
+            {{ combined_chart|safe }}
+        </div>
+    </div>
+
+    <div class="text-center mt-4 gsap-fade-up">
+        <a href="/predict" class="btn-outline"><i class="fa-solid fa-rotate-left"></i> Run Another Prediction</a>
+    </div>
+
+</div>
+
+<style>
+.result-tag {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid var(--neon-cyan);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 15px;
+    color: var(--neon-cyan);
+    margin: 4px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+.result-tag:hover {
+    background: var(--neon-cyan);
+    color: var(--bg-dark);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    transform: translateY(-2px);
+}
+</style>
+
+{% endblock %}
